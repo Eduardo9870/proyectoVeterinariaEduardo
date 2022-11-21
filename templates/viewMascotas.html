@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Chucky PB - Veterinaria/ {{titulo}}
+  </title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container-fluid">
+
+      <div class="logo">
+        <h1  ><a  href="/"><img class="img-fluid rounded" src="{% static 'img/logoVeterinaria.png' %}" ></a></h1>
+      </div>
+
+    </div>
+  </header><!-- End #header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <h1>Bienvenido a la veterinaria Chucky PB</h1>
+      <h2>{{titulo}}</h2>
+    </div>
+  </section><!-- #hero -->
+  <div class="alert alert-primary">
+      <strong>El promedio es: </strong> {{promedio.valor__avg}}  
+      <strong>El maximo es: </strong> {{max.valor__max}}  
+      <strong>El minimo es: </strong> {{min.valor__min}}   
+      <strong>El número de datos es: </strong> {{count.id__count}}   
+  </div>
+  <div class="container">
+    {% if mascotas %}
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre Mascota</th>
+                <th>Fecha Atención</th>
+                <th>Motivo</th>
+                <th>Diagnostico</th>
+                <th>Tratamiento</th>
+                <th>Observaciones</th>
+                <th>Valor</th>
+                <th>Edad</th>
+                <th>Descripción</th>
+                <th>Nombre dueño de mascota</th>
+                <th>Apellido dueño de mascota</th>
+                <th>Email dueño de mascota</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mascotas in mascotas %}
+            <tr>
+                <td>{{mascotas.id}}</td>
+                <td>{{mascotas.nombre}}</td>
+                <td>{{mascotas.fechaAtencion}}</td>
+                <td>{{mascotas.motivo}}</td>
+                <td>{{mascotas.diagnostico}}</td>
+                <td>{{mascotas.tratamiento}}</td>
+                <td>{{mascotas.observaciones}}</td>
+                <td>${{mascotas.valor}}</td>
+                <td>{{mascotas.edad}}</td>
+                <td>{{mascotas.descripcion}}</td>
+                <td>{{mascotas.nombreDueño}}</td>
+                <td>{{mascotas.apellidoDueño}}</td>
+                <td>{{mascotas.emailDueño}}</td>
+                <td>
+                    <a href="/mascotas/edit/{{mascotas.id}}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                    <a href="/mascotas/delete/{{mascotas.id}}" class="btn btn-danger"><i class="bi bi-trash3"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Nombre Mascota</th>
+                <th>Fecha Atención</th>
+                <th>Motivo</th>
+                <th>Diagnostico</th>
+                <th>Tratamiento</th>
+                <th>Observaciones</th>
+                <th>Valor</th>
+                <th>Edad</th>
+                <th>Descripción</th>
+                <th>Nombre dueño de mascota</th>
+                <th>Apellido dueño de mascota</th>
+                <th>Email dueño de mascota</th>
+            </tr>
+        </tfoot>
+    </table>
+    {% else %}
+    <div class="alert alert-danger text-center" role="alert">
+        <h1>No hay mascotas registradas</h1>
+    </div> 
+    {% endif %}
+  </div>
+    
+
+    <div class="container">
+         <!-- Agregar mascota -->
+        <a href="/add" class="btn btn-success ">Agregar mascotas</a>
+            <!-- Volver a la derecha -->
+        <a href="/" class="btn btn-primary float-end">Volver</a>
+    </div>
+
+
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="mt-5">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Siimple</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End #footer -->
+  <!-- Template Main JS File -->
+
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
